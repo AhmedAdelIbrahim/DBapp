@@ -13,17 +13,20 @@ public class Page implements Serializable {
 	public boolean insert(Tuple myTuple){
 		if(tuples < 20) {
 			records.add(myTuple);
+			tuples++;
 			return true;
 		}
 		else{
 			return false;
 		}
 	}
-	public boolean delete(Tuple myTuple) {
+	public boolean delete(Object Key) {
+		Tuple myTuple = this.search(Key);
 		int index = records.indexOf(myTuple);
 		if(index != -1 && records.get(index).tombStone == false) {
 			Tuple record = records.get(index) ;
 			record.tombStone = true;
+			tuples--;
 			return true;
 		}
 		else {
