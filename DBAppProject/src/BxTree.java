@@ -1,5 +1,3 @@
-
-
 	/**
 	 * B+ Tree
 	 * If you understand B+ or B Tree better, M & N don't need to be the same
@@ -15,25 +13,25 @@
 	 * edited by Spoon! 2008
 	 * edited by Mistro 2010
 	 */
-	public class BxTree<Key extends Comparable<? super Key>, Value>
-	{
-	    /** Pointer to the root node. It may be a leaf or an inner node, but it is never null. */
-	    private Node root;
-	    /** the maximum number of keys in the leaf node, M must be > 0 */
-	    private final int M;
-	    /** the maximum number of keys in inner node, the number of pointer is N+1, N must be > 2 */
-	    private final int N;
+public class BxTree<Key extends Comparable<? super Key>, Value>
+{
+    /** Pointer to the root node. It may be a leaf or an inner node, but it is never null. */
+    private Node root;
+    /** the maximum number of keys in the leaf node, M must be > 0 */
+    private final int M;
+    /** the maximum number of keys in inner node, the number of pointer is N+1, N must be > 2 */
+    private final int N;
+ 
+    /** Create a new empty tree. */
+    public BxTree(int n) {
+    	this(n, n);
+    }
 	 
-	    /** Create a new empty tree. */
-	    public BxTree(int n) {
-		this(n, n);
-	    }
-	 
-	    public BxTree(int m, int n) {
-	        M = m;
-	        N = n;
-	        root = new LNode();
-	    }
+    public BxTree(int m, int n) {
+    	M = m;
+    	N = n;
+	    root = new LNode();
+	   }
 	 
 	    public void insert(Key key, Value value) {
 		System.out.println("insert key=" + key);
