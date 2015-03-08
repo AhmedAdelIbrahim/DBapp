@@ -1,0 +1,38 @@
+import java.util.ArrayList;
+import java.util.Hashtable;
+
+
+public class Table {
+	ArrayList<Page> pages;
+	Hashtable<String,String> col;
+	Hashtable<String,String> ref;
+	Hashtable<String, Integer> index;
+	ArrayList<String> primary;
+	String name;
+	public Table (String name, ArrayList<String> colName, ArrayList<String> types,Hashtable<String,String> ref,ArrayList<String> primary) {
+		if (colName.size() != types.size())
+			return; 
+		for(int i = 0; i <colName.size(); i++) {
+			col.put(colName.get(i), types.get(i));
+			index.put(colName.get(i), i);
+		}
+		this.name = name; 
+		pages = new ArrayList<String>();
+		this.ref = ref;
+		this.primary = primary;
+	}
+	public boolean insertIntoTable(ArrayList<String> colName , ArrayList<Object> values) {
+		ArrayList<Integer> ColNum = new ArrayList<Integer>();
+		for(int i = 0; i <colName.size(); i++) {
+			if(!index.containsKey(colName.get(i)))
+				return false;
+		}
+		Page curr = pages.get(pages.size()-1);
+		
+		for(int i = 0; i < colName.size(); i++) {
+			int temp = index.get(colName.get(i));
+			
+		}
+	}
+	
+}

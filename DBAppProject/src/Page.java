@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 public class Page implements Serializable {
 	int tuples;
-	ArrayList<Tuple> records;
-	
+	ArrayList<ArrayList<Comparable>> records;
+	ArrayList<Boolean> tombStone; 
 	public Page() {
 		tuples = 0;
-		records = new ArrayList();
+		tombStone = new ArrayList<Boolean>();
+		records = new ArrayList<ArrayList<Comparable>>();
 	}
-	public boolean insert(Tuple myTuple){
+	public boolean insert(ArrayList<Comparable> myTuple){
 		if(tuples < 20) {
 			records.add(myTuple);
 			tuples++;
@@ -23,9 +24,9 @@ public class Page implements Serializable {
 	public boolean delete(Object Key) {
 		Tuple myTuple = this.search(Key);
 		int index = records.indexOf(myTuple);
-		if(index != -1 && records.get(index).tombStone == false) {
-			Tuple record = records.get(index) ;
-			record.tombStone = true;
+		
+		if(index != -1 && (!tombStone.get(index))) {
+			tombStone.add(index, true);
 			tuples--;
 			return true;
 		}
@@ -34,13 +35,13 @@ public class Page implements Serializable {
 			return false;
 		}
 	}
-	public Tuple search (Object Key) {
-		 Tuple wanted = new Tuple();
+	// check 2alabtaha
+	public ArrayList<ArrayList<Comparable>> search (Object Key) {
+		 ArrayList<ArrayList<Comparable>> wanted = null;
 		 for(int i = 0; i<tuples; i++) {
-			 for(int j = 0; j<records.get(i).record.size() ; j++){
-				 if(Key.equals(records.get(i).record.get(j))) {
-					 wanted =  records.get(i);
-					 break;
+			 for(int j = 0; j<records.get(i).size() ; j++){
+				 if(Key.equals(records.get(i).get(j))) {
+					 wanted.add(records.get(i));
 				 }
 			 }
 		 }
